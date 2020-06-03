@@ -1,7 +1,7 @@
 var Joi = require('@hapi/joi');
 
 // Definindo a configuração desejada dos campos
-var validandoCampos = Joi.object({
+var validandoCamposCadastro = Joi.object({
     nome: Joi.string().required().min(6),
     email: Joi.string().required().min(6).email(),
     senha: Joi.string().required().min(6)
@@ -9,5 +9,5 @@ var validandoCampos = Joi.object({
 
 // Exporto a função para validar
 module.exports = function(campos){
-    return validandoCampos.validate(campos);
+    return validandoCamposCadastro.validate(campos);
 };
