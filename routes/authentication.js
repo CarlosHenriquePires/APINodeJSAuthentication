@@ -36,14 +36,21 @@ router.post('/cadastrar', async function(req,res){
 
 // Rota para login do usuário
 router.post('/login', async function(req,res){
-
+    
     // Receber o retorno de um erro caso haja
     var {error} = validandoLogin(req.body);
     if(error) return res.status(400).send(error.details[0].message); // Enviar o error
 
-    // Verificando se o e-mail não existe
-    var emailExiste = await usuarioModel.findOne({email: req.body.email});
-    if(!emailExiste) return res.status(400).send("E-mail ou senha incorreta!");
+    // Verificando se o usuário não existe
+    var usuarioExiste = await usuarioModel.findOne({email: req.body.email});
+    if(!usuarioExiste) return res.status(400).send("E-mail ou senha incorreta!");
+
+    // Comparar a senha com o hash
+    var compararSenha = await bcrypt.compare(req.body.senha, usuarioExiste.senha);
+    if(!compararSenha) return res.status(400).send("E-mail ou senha incorreta!");
+
+    res.send("Usuário Logado com Sucesso!");
+
 
 });
 
