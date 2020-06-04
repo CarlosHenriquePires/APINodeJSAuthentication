@@ -1,7 +1,8 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var dotenv = require('dotenv');
-var routerAuth = require('./routes/authentication');
+var routerAuth = require('./routes/apiLogin');
+var myVideos = require('./routes/apiVideos');
 var bodyparser = require('body-parser');
 
 var app = express();
@@ -20,8 +21,10 @@ mongoose.connect(process.env.BD_URL, { useUnifiedTopology: true }, function(err)
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extends: true }));
 
-// Configurando a rota
+// Configurando o middelware da rota de autenticação
 app.use('/api/usuario',routerAuth);
+// Configurando o middelwarea da rota de videos
+app.use('/api',myVideos);
 
 // Definindo a porta que o servidor vai ouvir
 app.listen(3000, function(){
