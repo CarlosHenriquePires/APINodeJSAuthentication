@@ -54,7 +54,8 @@ router.post('/login', async function(req,res){
     var token = jwt.sign({_id: usuarioExiste._id},process.env.TOKEN_SECRET); // Criar o token_secret no .env
 
     // Enviando o token via header
-    res.header("auth-token",token).send("Login Efetuado com Sucesso!");
+    //res.header("auth-token",token).send("Login Efetuado com Sucesso!");
+    res.send({status: "Login Efetuado com Sucesso!",token: token, _id: usuarioExiste._id, nome: usuarioExiste.nome, email: usuarioExiste.email});
 });
 
 module.exports = router;

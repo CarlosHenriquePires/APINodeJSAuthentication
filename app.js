@@ -1,9 +1,10 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var dotenv = require('dotenv');
-var routerAuth = require('./routes/apiLogin');
-var myVideos = require('./routes/apiVideos');
+var apiLogin = require('./routes/apiLogin');
+var apiVideos = require('./routes/apiVideos');
 var bodyparser = require('body-parser');
+var cors = require('cors');
 
 var app = express();
 // Iniciando a configuração do .env
@@ -21,10 +22,17 @@ mongoose.connect(process.env.BD_URL, { useUnifiedTopology: true }, function(err)
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extends: true }));
 
-// Configurando o middelware da rota de autenticação
-app.use('/api/usuario',routerAuth);
-// Configurando o middelwarea da rota de videos
-app.use('/api',myVideos);
+//Habilitando o CORS
+var corsOptions = {
+    origin: 'http://localhost:4200',
+    optionsSuccessStatus: 200 
+}
+app.use(cors(corsOptions));
+
+// Configurando o middleware da rota de autenticação
+app.use('/api/usuario',apiLogin);
+// Configurando o middleware da rota de videos
+app.use('/api',apiVideos);
 
 // Definindo a porta que o servidor vai ouvir
 app.listen(3000, function(){
