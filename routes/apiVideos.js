@@ -10,7 +10,22 @@ router.get('/myVideos',validarToken ,function(req,res){
         descricao:'Música 24/7 para estudo',
         categoria:'Música para Estudo',
         link:'https://www.youtube.com/embed/5qap5aO4i9A'
-    }];
+    },
+    {
+        titulo:'Chillhop Radio - jazzy & lofi hip hop beats',
+        descricao:'Música 24/7 para estudo',
+        categoria:'Música para Estudo',
+        link:'https://www.youtube.com/embed/5yx6BWlEVcY'
+    },
+    {
+        titulo:'lofi hip hop radio - beats to sleep/chill to',
+        descricao:'Música 24/7 para estudo',
+        categoria:'Música para Estudo',
+        link:'https://www.youtube.com/embed/DWcJFNfaw9c'
+    },
+
+
+];
 
     // Retorna um json 
     res.send(myVideosData);

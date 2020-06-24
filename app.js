@@ -11,7 +11,7 @@ var app = express();
 dotenv.config();
 
 // Conectando ao mongo passando endereço localizado no .env
-mongoose.connect(process.env.BD_URL, { useUnifiedTopology: true }, function(err){
+mongoose.connect(process.env.BD_URL, { useUnifiedTopology: true, useNewUrlParser: true }, function(err){
     if(err) 
         return console.log(err);
     else 
@@ -20,7 +20,7 @@ mongoose.connect(process.env.BD_URL, { useUnifiedTopology: true }, function(err)
 
 // Aceitando requisições json e via body e forms
 app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({ extends: true }));
+app.use(bodyparser.urlencoded({}));
 
 //Habilitando o CORS
 var corsOptions = {

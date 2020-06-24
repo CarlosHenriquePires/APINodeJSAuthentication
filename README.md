@@ -1,5 +1,5 @@
 # APINodeJSAuthentication
-    É uma API para realizar autenticação de usuários utilizando mongoDB.
+    É uma API para realizar autenticação de usuários utilizando mongoDB com encriptação de senhas e token.
 
 ## Dependências:
 
